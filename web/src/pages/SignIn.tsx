@@ -1,15 +1,12 @@
 function SignIn() {
-  const handleSignIn = () => {
-    console.log("oi");
+  const handleLogin = () => {
+    window.location.href = process.env.REACT_APP_AMAZON_COGNITO_ENDPOINT!;
   };
 
   return (
-    <>
-      <div>
-        <h1>Tela de Login</h1>
-        <button onClick={() => handleSignIn()}>Login</button>
-      </div>
-    </>
+    <button type="button" onClick={() => handleLogin()}>
+      Login
+    </button>
   );
 }
 
