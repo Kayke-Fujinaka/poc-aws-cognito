@@ -18,6 +18,7 @@ function SignIn() {
 
   return (
     <>
+      <h1>Tela de Login</h1>
       <button onClick={handleFederatedSignIn} disabled={isLoading}>
         {isLoading ? "Carregando..." : "Login com AzureAD"}
       </button>
