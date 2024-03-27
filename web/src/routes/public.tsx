@@ -8,9 +8,7 @@ interface IPublicRoute {
 }
 
 export const PublicRoute = ({ children }: IPublicRoute) => {
-  const { user, isLoading } = useContext(UserContext);
-
-  if (isLoading) return <div>Carregando...</div>;
+  const { user } = useContext(UserContext);
 
   return !user ? <>{children}</> : <Navigate to="/inicio" />;
 };

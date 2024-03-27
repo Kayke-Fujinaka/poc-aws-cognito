@@ -8,9 +8,7 @@ interface IPrivateRoute {
 }
 
 export const PrivateRoute = ({ children }: IPrivateRoute) => {
-  const { user, isLoading } = useContext(UserContext);
-
-  if (isLoading) return <div>Carregando...</div>;
+  const { user } = useContext(UserContext);
 
   return user ? <>{children}</> : <Navigate to="/login" />;
 };
