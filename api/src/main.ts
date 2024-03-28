@@ -5,7 +5,7 @@ import { AppModule } from './app/app.module';
 import awsExports from './config/aws-cognito';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   Amplify.configure(awsExports);
 
