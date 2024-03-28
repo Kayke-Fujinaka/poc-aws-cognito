@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 
-import { IUserPayload } from '../interfaces';
-
 @Injectable()
 export class AuthService {
   constructor() {}
@@ -12,10 +10,16 @@ export class AuthService {
     };
   }
 
-  protected(user: IUserPayload) {
+  protected() {
     return {
       message: 'Este recurso é protegido e requer autenticação.',
-      user,
+    };
+  }
+
+  admin() {
+    return {
+      message:
+        'Este recurso é protegido, requer autenticação e permissão de administrador.',
     };
   }
 }

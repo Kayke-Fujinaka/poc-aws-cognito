@@ -2,18 +2,17 @@ import { signOut } from "aws-amplify/auth";
 import { useContext, useState } from "react";
 
 import { UserContext } from "../contexts/UserContext";
-import { BackendRoutes } from "../services/backend";
+import { ResourcesRoutes } from "../services/resources";
 
 function Home() {
   const { user } = useContext(UserContext);
   const [apiResponse, setApiResponse] = useState("");
 
-  const handleResource = async (resourceKey: keyof typeof BackendRoutes) => {
+  const handleResource = async (resourceKey: keyof typeof ResourcesRoutes) => {
     try {
-      const data = await BackendRoutes[resourceKey]();
+      const data = await ResourcesRoutes[resourceKey]();
       setApiResponse(JSON.stringify(data, null, 2));
     } catch (error) {
-      console.error(`Falha ao acessar o recurso ${resourceKey}:`, error);
       setApiResponse(`Falha ao acessar o recurso ${resourceKey}.`);
     }
   };
@@ -29,6 +28,9 @@ function Home() {
         </button>
         <button onClick={() => handleResource("protected")}>
           Testar Recurso Protegido
+        </button>
+        <button onClick={() => handleResource("admin")}>
+          Testar Recurso Administrativo
         </button>
         {apiResponse && (
           <div className="api-response-container">

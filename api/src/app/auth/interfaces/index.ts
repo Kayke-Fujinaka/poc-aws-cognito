@@ -47,3 +47,8 @@ export interface IUserPayload {
     | 'username'
   >;
 }
+
+export enum Role {
+  User = 'user',
+  Admin = 'administrator',
+}

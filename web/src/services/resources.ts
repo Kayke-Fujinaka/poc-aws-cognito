@@ -21,13 +21,14 @@ async function fetchResource({
   try {
     const { data } = await api(config);
     return data;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Erro ao requisitar:", endpoint, error);
-    throw error;
+    throw new Error(error.response?.data?.message);
   }
 }
 
-export const BackendRoutes = {
+export const ResourcesRoutes = {
   public: () => fetchResource({ endpoint: `/auth/public` }),
   protected: () => fetchResource({ endpoint: `/auth/protected` }),
+  admin: () => fetchResource({ endpoint: `/auth/admin` }),
 };

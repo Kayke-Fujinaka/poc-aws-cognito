@@ -1,8 +1,9 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
 
-import { IUserPayload } from '../interfaces';
+import { Roles } from '../decorators/roles.decorator';
+import { RolesGuard } from '../guards/roles.guard';
+import { Role } from '../interfaces';
 import { AuthService } from '../services/auth.services';
 
 @Controller('auth')
@@ -16,7 +17,14 @@ export class AuthController {
 
   @Get('protected')
   @UseGuards(AuthGuard('jwt'))
-  getProtectedResource(@Req() { user }: Request) {
-    return this.authService.protected(user as IUserPayload);
+  getProtectedResource() {
+    return this.authService.protected();
+  }
+
+  @Get('admin')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.Admin)
+  getAdminResource() {
+    return this.authService.admin();
   }
 }
