@@ -9,13 +9,13 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Get('public')
-  getPublicResouce() {
+  getPublicResource() {
     return this.authService.public();
   }
 
   @Get('protected')
   @UseGuards(AuthGuard('jwt'))
-  getProtectedResouce(@Req() { user }: Request) {
+  getProtectedResource(@Req() { user }: Request) {
     return this.authService.protected(user as IUserPayload);
   }
 }
