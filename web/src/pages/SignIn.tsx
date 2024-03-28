@@ -1,8 +1,8 @@
 import { signInWithRedirect } from "aws-amplify/auth";
 import { useContext } from "react";
 
+import { provider } from "../config/amazon";
 import { UserContext } from "../contexts/UserContext";
-import { provider } from "../services/amazon";
 
 function SignIn() {
   const { isLoading, refreshUser } = useContext(UserContext);
