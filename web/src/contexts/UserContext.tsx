@@ -24,8 +24,6 @@ export function UserContextProvider({ children }: IUserContextProvider) {
       const session = await fetchAuthSession();
       if (!session.tokens) return;
 
-      console.log(session)
-
       const currentUser = await getCurrentUser();
       setUser(currentUser);
     } catch (error) {

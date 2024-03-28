@@ -4,8 +4,6 @@ export const provider = {
   custom: process.env.SSO_IDENTITY_PROVIDER!,
 };
 
-console.log(process.env.SSO_IDENTITY_PROVIDER);
-
 const awsExports: ResourcesConfig = {
   Auth: {
     Cognito: {

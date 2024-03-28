@@ -21,9 +21,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: IJwtPayload): Promise<{ payload: IJwtPayload }> {
-    console.log(
-      `Usuário ${payload.sub} autenticado com sucesso em ${new Date().toISOString()}`,
-    );
     return { payload };
   }
 }

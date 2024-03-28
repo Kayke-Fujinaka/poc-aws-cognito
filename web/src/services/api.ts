@@ -13,8 +13,7 @@ api.interceptors.request.use(async (config) => {
     const session = await fetchAuthSession();
     if (
       session &&
-      session.tokens?.accessToken &&
-      session.tokens.accessToken.payload
+      session.tokens?.accessToken
     ) {
       config.headers.Authorization = `Bearer ${session.tokens.accessToken}`;
     }
