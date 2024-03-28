@@ -3,21 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
-interface IJWT {
-  sub: string;
-  'cognito:groups': string[];
-  iss: string;
-  version: number;
-  client_id: string;
-  origin_jti: string;
-  token_use: string;
-  scope: string;
-  auth_time: number;
-  exp: number;
-  iat: number;
-  jti: string;
-  username: string;
-}
+import { IJwtPayload } from '../interfaces';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -34,7 +20,10 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  async validate(payload: IJWT): Promise<{ userId: string }> {
-    return { userId: payload?.sub };
+  async validate(payload: IJwtPayload): Promise<{ payload: IJwtPayload }> {
+    console.log(
+      `Usuário ${payload.sub} autenticado com sucesso em ${new Date().toISOString()}`,
+    );
+    return { payload };
   }
 }
