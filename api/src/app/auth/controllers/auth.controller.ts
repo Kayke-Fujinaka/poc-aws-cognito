@@ -2,7 +2,6 @@ import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 import { Roles } from '../decorators/roles.decorator';
-import { RolesGuard } from '../guards/roles.guard';
 import { Role } from '../interfaces';
 import { AuthService } from '../services/auth.services';
 
@@ -22,7 +21,7 @@ export class AuthController {
   }
 
   @Get('admin')
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @UseGuards(AuthGuard('jwt'))
   @Roles(Role.Admin)
   getAdminResource() {
     return this.authService.admin();
