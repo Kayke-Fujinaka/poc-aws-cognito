@@ -1,24 +1,21 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
+import { IUserPayload } from '../interfaces';
+import { AuthService } from '../services/auth.services';
 
 @Controller('auth')
 export class AuthController {
-  constructor() {}
+  constructor(private readonly authService: AuthService) {}
 
   @Get('public')
   getPublicResouce() {
-    return {
-      message: 'Este recurso é público e não requer autenticação.',
-    };
+    return this.authService.public();
   }
 
   @Get('protected')
   @UseGuards(AuthGuard('jwt'))
   getProtectedResouce(@Req() { user }: Request) {
-    return {
-      message: 'Este recurso é protegido e requer autenticação.',
-      user: user,
-    };
+    return this.authService.protected(user as IUserPayload);
   }
 }

@@ -28,3 +28,22 @@ export interface IJwtPayload {
   nonce?: string;
   at_hash?: string;
 }
+
+export interface IUserPayload {
+  payload: Pick<
+    IJwtPayload,
+    | 'sub'
+    | 'cognito:groups'
+    | 'iss'
+    | 'version'
+    | 'client_id'
+    | 'origin_jti'
+    | 'token_use'
+    | 'scope'
+    | 'auth_time'
+    | 'exp'
+    | 'iat'
+    | 'jti'
+    | 'username'
+  >;
+}
