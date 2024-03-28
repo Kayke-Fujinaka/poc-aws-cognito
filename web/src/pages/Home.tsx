@@ -8,18 +8,13 @@ function Home() {
   const { user } = useContext(UserContext);
   const [apiResponse, setApiResponse] = useState("");
 
-  const handleResource = async (resource: string) => {
+  const handleResource = async (resourceKey: "public" | "protected") => {
     try {
-      const fetchFunction =
-        resource === "public"
-          ? BackendRoutes.fetchPublicResource
-          : BackendRoutes.fetchProtectedResource;
-
-      const data = await fetchFunction();
+      const data = await BackendRoutes[resourceKey]();
       setApiResponse(JSON.stringify(data, null, 2));
     } catch (error) {
-      console.error(error);
-      setApiResponse(`Falha ao acessar o recurso ${resource}.`);
+      console.error(`Falha ao acessar o recurso ${resourceKey}:`, error);
+      setApiResponse(`Falha ao acessar o recurso ${resourceKey}.`);
     }
   };
 

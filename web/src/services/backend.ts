@@ -28,6 +28,6 @@ async function fetchResource({
 }
 
 export const BackendRoutes = {
-  fetchPublicResource: () => fetchResource({ endpoint: `/auth/public` }),
-  fetchProtectedResource: () => fetchResource({ endpoint: `/auth/protected` }),
+  public: () => fetchResource({ endpoint: `/auth/public` }),
+  protected: () => fetchResource({ endpoint: `/auth/protected` }),
 };
