@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
-
 import { Amplify } from 'aws-amplify';
+
 import { AppModule } from './app/app.module';
 import awsExports from './config/aws-cognito';
 
