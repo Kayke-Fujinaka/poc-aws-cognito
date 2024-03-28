@@ -8,7 +8,7 @@ function Home() {
   const { user } = useContext(UserContext);
   const [apiResponse, setApiResponse] = useState("");
 
-  const handleResource = async (resourceKey: "public" | "protected") => {
+  const handleResource = async (resourceKey: keyof typeof BackendRoutes) => {
     try {
       const data = await BackendRoutes[resourceKey]();
       setApiResponse(JSON.stringify(data, null, 2));
