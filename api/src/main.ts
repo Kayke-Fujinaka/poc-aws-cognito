@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Amplify } from 'aws-amplify';
+import helmet from 'helmet';
 
 import { AppModule } from '@app/app.module';
 import awsExports from '@shared/configs/aws-cognito';
@@ -15,6 +16,8 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new ErrorInterceptor());
+
+  app.use(helmet);
 
   LoggerConfig.setup(app);
   SwaggerConfig.setup(app);
