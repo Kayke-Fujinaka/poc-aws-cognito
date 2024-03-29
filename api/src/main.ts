@@ -22,7 +22,7 @@ async function bootstrap() {
   LoggerConfig.setup(app);
   SwaggerConfig.setup(app);
 
-  const port = process.env.PORT || 8080;
+  const port = process.env.APP_PORT || 8080;
   await app.listen(port, () => {
     console.log(`Aplicação rodando na porta: ${port}`);
     console.log(
