@@ -1,46 +1,58 @@
-# Getting Started with Create React App
+# Frontend: Integração com Amazon Cognito
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto é a parte frontend de uma aplicação que utiliza o Amazon Cognito para autenticação e autorização de usuários. Ele detalha como configurar e executar o frontend, conectando-se ao backend e ao Amazon Cognito para gerenciar o fluxo de autenticação.
 
-## Available Scripts
+## Configuração
 
-In the project directory, you can run:
+Antes de iniciar, certifique-se de configurar o Amazon Cognito na AWS e obter as credenciais necessárias, como descrito no README principal.
 
-### `npm start`
+### Variáveis de Ambiente
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Configure as variáveis de ambiente necessárias para a integração com o Cognito no arquivo `.env` no diretório raiz do projeto frontend:
+```
+REACT_APP_API_BASE_URL=<Sua URL Base do Backend>
+REACT_APP_SSO_IDENTITY_PROVIDER=<Seu Identity Provider>
+REACT_APP_SSO_USER_POOL_ID=<Seu User Pool ID>
+REACT_APP_SSO_USER_POOL_CLIENT_ID=<Seu User Pool Client ID>
+REACT_APP_SSO_COGNITO_DOMAIN=<Seu Domínio do Cognito>
+REACT_APP_SSO_COGNITO_SIGNIN_REDIRECT_URL=<Sua URL de Redirect após Login>
+REACT_APP_SSO_COGNITO_SIGNOUT_REDIRECT_URL=<Sua URL de Redirect após Logout>
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Instalação das Dependências
 
-### `npm test`
+No diretório do projeto, execute o seguinte comando para instalar as dependências necessárias:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+# ou
+yarn
+```
 
-### `npm run build`
+## Executando o Projeto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Após a configuração, você pode iniciar a aplicação:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm run start
+# ou
+yarn start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Isso iniciará a aplicação. Abra http://localhost:3050 para visualizá-la no navegador.
 
-### `npm run eject`
+## Autenticação com Amazon Cognito
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+O projeto utiliza o Amazon Cognito para autenticação de usuários. As funções de login, logout e acesso a recursos protegidos são implementadas utilizando o AWS Amplify e a configuração especificada em `awsExports`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Estrutura do Projeto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+O projeto inclui várias páginas e componentes para demonstrar o fluxo de autenticação e o acesso a recursos protegidos e públicos.
+- SignIn: Componente para realizar o login usando um provedor federado ou Cognito diretamente.
+- Home: Página inicial que mostra informações do usuário autenticado e permite acessar recursos protegidos e realizar logout.
+- UserContext: Contexto React para gerenciar o estado de autenticação do usuário em todo o aplicativo.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Conclusão
 
-## Learn More
+Este README descreve os passos para configurar e executar o frontend de uma aplicação integrada com o Amazon Cognito. Siga as instruções detalhadas para garantir que o ambiente esteja corretamente configurado para autenticação e autorização de usuários.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
