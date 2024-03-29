@@ -1,3 +1,5 @@
+import { INestApplication } from '@nestjs/common';
+import * as morgan from 'morgan';
 import * as winston from 'winston';
 
 export const loggerConfigs = {
@@ -19,3 +21,23 @@ export const loggerConfigs = {
     }),
   ],
 };
+
+export class LoggerConfig {
+  static setup(app: INestApplication): void {
+    app.use(
+      morgan((tokens, req, res) => {
+        if (req.method === 'OPTIONS') return null;
+
+        return [
+          tokens.method(req, res),
+          tokens.url(req, res),
+          tokens.status(req, res),
+          tokens.res(req, res, 'content-length'),
+          '-',
+          tokens['response-time'](req, res),
+          'ms',
+        ].join(' ');
+      }),
+    );
+  }
+}

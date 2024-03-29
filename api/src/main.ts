@@ -4,8 +4,9 @@ import { Amplify } from 'aws-amplify';
 
 import { AppModule } from '@app/app.module';
 import awsExports from '@shared/configs/aws-cognito';
+import { LoggerConfig } from '@shared/configs/logger';
+import { SwaggerConfig } from '@shared/configs/swagger';
 import { ErrorInterceptor } from '@shared/errors/exception.interceptor';
-import { httpLoggingMiddleware } from '@shared/middlewares/logger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
@@ -15,11 +16,15 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new ErrorInterceptor());
 
-  httpLoggingMiddleware(app);
+  LoggerConfig.setup(app);
+  SwaggerConfig.setup(app);
 
   const port = process.env.PORT || 8080;
   await app.listen(port, () => {
     console.log(`Aplicação rodando na porta: ${port}`);
+    console.log(
+      `Documentação da API disponível em: http://localhost:${port}/api/docs`,
+    );
   });
 }
 bootstrap();
